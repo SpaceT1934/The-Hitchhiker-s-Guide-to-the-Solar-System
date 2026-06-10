@@ -7,6 +7,7 @@ import { ArtifactCard } from './ArtifactCard';
 import { VoyagePlot } from './VoyagePlot';
 import { MoviePanel } from './MoviePanel';
 import { LibraryPanel } from './LibraryPanel';
+import { KnowledgeTicker } from './KnowledgeTicker';
 
 export function HUD() {
   const {
@@ -117,6 +118,7 @@ export function HUD() {
 
       <MoviePanel />
       <LibraryPanel />
+      <KnowledgeTicker />
     </>
   );
 }

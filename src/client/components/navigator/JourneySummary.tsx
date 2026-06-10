@@ -6,6 +6,7 @@ import { toPng } from 'html-to-image';
 import { useSceneStore, PLANET_LABELS } from '@/client/store/sceneStore';
 import { SPACECRAFT } from '@/client/data/journeyInventory';
 import { MOVIES_BY_PATH } from '@/client/data/movieInfo';
+import { PLANET_FACTS } from '@/client/data/planetInfo';
 
 // JourneySummary — final card shown after the last stop. Shows the mood
 // line, the full itinerary in a poster grid, and the closing line.
@@ -208,6 +209,40 @@ export function JourneySummary() {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="mt-9 h-px w-full bg-stardust/15" />
+
+            {/* Knowledge keywords extracted from the journey */}
+            <div className="mt-8 text-stardust/55 text-[10px] tracking-cosmic uppercase">
+              知识点回顾 · What You Learned
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {journey.stops.map((stop) =>
+                stop.target.kind === 'planet'
+                  ? (() => {
+                      const f = PLANET_FACTS[stop.target.id];
+                      return f.facts.slice(0, 3).map(([label, value]) => (
+                        <span
+                          key={label}
+                          className="px-2.5 py-1 border border-stardust/15 bg-stardust/[0.02] text-stardust/70 text-[9px] tracking-wider2"
+                        >
+                          {f.nameZh} · {label}: {value}
+                        </span>
+                      ));
+                    })()
+                  : (() => {
+                      const s = SPACECRAFT[stop.target.id];
+                      return (
+                        <span
+                          key={stop.target.id}
+                          className="px-2.5 py-1 border border-stardust/15 bg-stardust/[0.02] text-stardust/70 text-[9px] tracking-wider2"
+                        >
+                          {s.name} · {s.agency} · {s.launched}
+                        </span>
+                      );
+                    })()
+              )}
             </div>
 
             <div className="mt-9 h-px w-full bg-stardust/15" />

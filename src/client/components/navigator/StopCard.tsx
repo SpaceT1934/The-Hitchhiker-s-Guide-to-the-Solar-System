@@ -128,11 +128,22 @@ function ScienceCard({ stop, index, total }: { stop: JourneyStop; index: number;
         {s.name}
       </div>
       <div className="mt-0.5 text-stardust/35 text-[10px] tracking-cosmic uppercase">
-        {s.id.replace(/_/g, ' ')} · 位于{hostFacts.nameZh}附近
+        {s.agency} · {s.launched} 年发射
       </div>
       <div className="mt-3 h-px w-full bg-stardust/12" />
-      <p className="mt-3 text-stardust/75 text-[12px] leading-relaxed">
-        {s.description}
+      <div className="mt-3 grid grid-cols-1 gap-1 text-[10px]">
+        <div className="flex justify-between gap-2">
+          <span className="text-stardust/45 tracking-wider2">所在地</span>
+          <span className="text-stardust/75">{hostFacts.nameZh} {s.kind === 'surface' ? '表面' : s.kind === 'orbit' ? '轨道' : '以远'}</span>
+        </div>
+        <div className="flex justify-between gap-2">
+          <span className="text-stardust/45 tracking-wider2">状态</span>
+          <span className="text-stardust/75">{s.status}</span>
+        </div>
+      </div>
+      <div className="mt-3 h-px w-full bg-stardust/12" />
+      <p className="mt-3 text-stardust/65 text-[11px] leading-relaxed">
+        {s.detail}
       </p>
     </div>
   );
