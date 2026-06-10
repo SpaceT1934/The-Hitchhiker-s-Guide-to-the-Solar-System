@@ -62,7 +62,7 @@ export function VoyagePlot({ fadeCls }: Props) {
             <ChoiceButton
               labelEn="Navigator"
               labelZh="领航员引导"
-              hint="系统根据你想探索的故事策展路线"
+              hint="AI 导览员根据你的问题策划科学探索路线"
               glow
               onClick={openNavigator}
             />

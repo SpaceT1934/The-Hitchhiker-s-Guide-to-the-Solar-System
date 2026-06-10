@@ -144,14 +144,14 @@ function OpeningOverlay({ onBegin }: { onBegin: () => void }) {
           className="text-stardust/90 font-thin text-[30px] md:text-[34px] leading-[1.45] tracking-wider2"
           style={textGlow}
         >
-          Before we reached the stars,
+          Science begins with a question.
           <br />
-          we imagined them for a long time.
+          Imagination carries us to the stars.
         </p>
         <p className="mt-10 text-stardust/50 font-thin text-[15px] leading-loose tracking-wider2">
-          在人类抵达星辰之前，
+          科学从提问开始，
           <br />
-          我们已经在幻想中航行了很久。
+          想象力带我们抵达星辰。
         </p>
       </Fade>
 
@@ -186,14 +186,14 @@ function ImaginationOverlay({ onEnter }: { onEnter: () => void }) {
           className="text-stardust/90 font-thin text-[30px] md:text-[34px] leading-[1.45] tracking-wider2"
           style={textGlow}
         >
-          Every planet carries
+          Every planet holds a story —
           <br />
-          humanity&apos;s imagination.
+          one of science, one of imagination.
         </p>
         <p className="mt-10 text-stardust/50 font-thin text-[15px] leading-loose tracking-wider2">
-          每一颗行星，
+          每一颗行星都有两个故事，
           <br />
-          都承载着人类的想象。
+          一个属于科学，一个属于想象。
         </p>
       </Fade>
 

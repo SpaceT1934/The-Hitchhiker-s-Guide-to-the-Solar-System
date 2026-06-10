@@ -130,7 +130,7 @@ export function JourneySummary() {
                   太阳系漫游指南 · Journey 01
                 </div>
                 <div className="mt-1 text-stardust/55 text-[12px] tracking-wider2">
-                  科幻观影路线 · 由你的心境策展
+                  科学与想象之旅 · 每一次探索都是新的发现
                 </div>
               </div>
               <div className="text-stardust/35 text-[10px] tracking-cosmic uppercase tabular-nums">

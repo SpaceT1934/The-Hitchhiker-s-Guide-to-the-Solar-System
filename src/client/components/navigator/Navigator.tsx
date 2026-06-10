@@ -17,12 +17,12 @@ import type { JourneyApiResponse } from '@/shared/journey';
 // captures pointer events anyway).
 
 const PLACEHOLDERS = [
-  '想看人类幻想中回家的旅程…',
-  '对深空孤独的故事感兴趣',
-  '想了解人类对外星生命的想象',
-  '想感受宇宙尺度下的渺小与敬畏',
-  '时间错乱的宇宙故事',
-  '人类离开太阳系的故事'
+  '火星上真的有过水吗？',
+  '太阳还能燃烧多久？',
+  '木星的大红斑到底是什么？',
+  '人类什么时候能登上火星？',
+  '土星的光环是怎么形成的？',
+  '旅行者一号现在飞到哪里了？'
 ];
 
 export function Navigator() {
@@ -174,10 +174,10 @@ export function Navigator() {
           </div>
 
           <div className="mt-2 text-stardust/40 text-[10px] tracking-wider2 uppercase">
-            What cosmic story would you like curated
+            What would you like to learn about the Solar System
           </div>
           <div className="mt-1.5 text-stardust/30 text-[12px] tracking-wider2 leading-relaxed">
-            你想探索人类关于宇宙的什么幻想？为你策展一段太空路线
+            你想了解太阳系的什么知识？带你探索科学与想象的边界
           </div>
 
           <div className="mt-7 h-px w-full bg-stardust/15" />
