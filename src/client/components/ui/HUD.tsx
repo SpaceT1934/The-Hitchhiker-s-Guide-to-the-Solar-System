@@ -20,7 +20,9 @@ export function HUD() {
     setFocusedArtifact,
     cancelVoyage,
     introDone,
-    navigatorPhase
+    navigatorPhase,
+    journey,
+    journeyStopIndex
   } = useSceneStore();
 
   const inVoyage = status === 'voyaging';
@@ -85,6 +87,13 @@ export function HUD() {
       >
         {/* Spacer to push card below brand (only when brand is visible) */}
         {hudVisible && <div className="h-[52px]" />}
+
+        {/* Journey progress indicator — only during journey */}
+        {inJourney && journey && (
+          <div className="mb-3 text-stardust/35 text-[9px] tracking-cosmic uppercase tabular-nums">
+            第 {String(journeyStopIndex + 1).padStart(2, '0')} 站 / {String(journey.stops.length).padStart(2, '0')}
+          </div>
+        )}
 
         {focusedArtifact ? <ArtifactCard /> : <PlanetCard />}
       </div>

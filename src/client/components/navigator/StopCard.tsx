@@ -55,8 +55,6 @@ export function StopCard({ stop, index, total }: Props) {
   const film = MOVIES_BY_PATH[renderedStop.filmPath];
   if (!film) return null;
 
-  const stopLabel = `第 ${String(index + 1).padStart(2, '0')} 站 / ${String(total).padStart(2, '0')}`;
-
   return (
     <div className="absolute bottom-10 left-10 z-30 pointer-events-none">
       <div
@@ -76,10 +74,8 @@ export function StopCard({ stop, index, total }: Props) {
             className="h-20 w-auto object-contain rounded-sm shadow-[0_0_15px_rgba(200,180,120,0.15)]"
           />
           <div className="flex-1 min-w-0">
-            <div className="flex items-baseline justify-between gap-2">
-              <div className="text-stardust/25 text-[8px] tracking-cosmic uppercase">
-                🎬 相关电影 · {stopLabel}
-              </div>
+            <div className="text-stardust/25 text-[8px] tracking-cosmic uppercase">
+              🎬 相关电影
             </div>
             <div className="mt-1 text-stardust/90 text-[14px] tracking-wider2 font-light leading-tight">
               {film.titleZh}
