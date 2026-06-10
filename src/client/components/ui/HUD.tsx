@@ -40,14 +40,20 @@ export function HUD() {
         ? `观察中 · ${PLANET_LABELS[focused]}`
         : '太阳系漫游指南 · Solar System Guide';
 
-  // HUD hides whenever the Navigator (or a journey) is active so the user
-  // sees a clean cinematic frame — no PlanetCard text or brand line
-  // competing with the journey subtitle. Comes back when the user closes
-  // the Navigator / journey summary.
+  // Brand line + full HUD hides during Navigator prompt / loading / preview.
+  // But the top-left science card stays visible during journey (running) —
+  // JourneyController keeps focused/focusedArtifact in sync with the current
+  // stop, so PlanetCard/ArtifactCard auto-updates without duplication.
   const navigatorActive = navigatorPhase !== 'closed';
   const hudVisible = introDone && !navigatorActive;
+  const inJourney = navigatorPhase === 'running';
+  // Top-left card is always visible when we have a target (including during journey)
+  const cardVisible = introDone && (navigatorPhase === 'closed' || navigatorPhase === 'running');
   const fadeCls = `transition-opacity duration-1000 ease-out ${
     hudVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+  }`;
+  const cardFadeCls = `transition-opacity duration-1000 ease-out ${
+    cardVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
   }`;
 
   // Return clears spacecraft focus first, then planet focus on the second
@@ -63,6 +69,7 @@ export function HUD() {
 
   return (
     <>
+      {/* Brand header — hidden during journey to keep the frame clean */}
       <div
         className={`absolute top-8 left-10 z-10 pointer-events-none select-none worlds-fade-in ${fadeCls}`}
       >
@@ -70,7 +77,14 @@ export function HUD() {
         <div className="mt-3 text-stardust/40 text-[10px] tracking-wider2 uppercase">
           {brandLine}
         </div>
-        <div className="mt-4 h-px w-12 bg-stardust/20" />
+      </div>
+
+      {/* Science card — always present (including during journey) */}
+      <div
+        className={`absolute top-8 left-10 z-10 pointer-events-none select-none ${cardFadeCls}`}
+      >
+        {/* Spacer to push card below brand (only when brand is visible) */}
+        {hudVisible && <div className="h-[52px]" />}
 
         {focusedArtifact ? <ArtifactCard /> : <PlanetCard />}
       </div>
