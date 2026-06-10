@@ -71,24 +71,25 @@ export function HUD() {
 
   return (
     <>
-      {/* Brand header — hidden during journey to keep the frame clean */}
+      {/* Unified top-left panel — brand header + science card in one div */}
       <div
-        className={`absolute top-8 left-10 z-10 pointer-events-none select-none worlds-fade-in ${fadeCls}`}
+        className={`absolute top-8 left-10 z-10 pointer-events-none select-none worlds-fade-in ${cardFadeCls}`}
       >
-        <div className="text-stardust/85 text-xs tracking-cosmic uppercase">太阳系漫游指南</div>
-        <div className="mt-3 text-stardust/40 text-[10px] tracking-wider2 uppercase">
-          {brandLine}
-        </div>
-      </div>
+        {/* Brand title — only when HUD is fully visible (overview / focus) */}
+        {hudVisible && (
+          <>
+            <div className="text-stardust/85 text-xs tracking-cosmic uppercase">
+              太阳系漫游指南
+            </div>
+            <div className="mt-3 text-stardust/40 text-[10px] tracking-wider2 uppercase">
+              {brandLine}
+            </div>
+            <div className="mt-4 h-px w-12 bg-stardust/20" />
+            <div className="mt-4" />
+          </>
+        )}
 
-      {/* Science card — always present (including during journey) */}
-      <div
-        className={`absolute top-8 left-10 z-10 pointer-events-none select-none ${cardFadeCls}`}
-      >
-        {/* Spacer to push card below brand (only when brand is visible) */}
-        {hudVisible && <div className="h-[52px]" />}
-
-        {/* Journey progress indicator — only during journey */}
+        {/* Journey progress — only during journey running */}
         {inJourney && journey && (
           <div className="mb-3 text-stardust/35 text-[9px] tracking-cosmic uppercase tabular-nums">
             第 {String(journeyStopIndex + 1).padStart(2, '0')} 站 / {String(journey.stops.length).padStart(2, '0')}
