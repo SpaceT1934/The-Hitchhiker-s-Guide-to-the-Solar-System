@@ -73,7 +73,7 @@ export function HUD() {
     <>
       {/* Unified top-left panel — brand header + science card in one div */}
       <div
-        className={`absolute top-8 left-10 z-10 pointer-events-none select-none worlds-fade-in ${cardFadeCls}`}
+        className={`absolute top-8 left-10 z-10 pointer-events-none select-none ${cardFadeCls}`}
       >
         {/* Brand title — only when HUD is fully visible (overview / focus) */}
         {hudVisible && (
