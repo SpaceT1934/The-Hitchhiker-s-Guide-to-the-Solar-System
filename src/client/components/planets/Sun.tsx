@@ -48,7 +48,7 @@ export function Sun() {
   return (
     <group>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[SUN_RADIUS, 96, 96]} />
+        <sphereGeometry args={[SUN_RADIUS, 64, 64]} />
         <shaderMaterial
           ref={matRef}
           uniforms={uniforms}
@@ -59,7 +59,7 @@ export function Sun() {
       </mesh>
 
       <mesh scale={1.2}>
-        <sphereGeometry args={[SUN_RADIUS, 48, 48]} />
+        <sphereGeometry args={[SUN_RADIUS, 32, 32]} />
         <shaderMaterial
           uniforms={coronaInner}
           vertexShader={coronaVertex}
@@ -72,7 +72,7 @@ export function Sun() {
       </mesh>
 
       <mesh scale={1.65}>
-        <sphereGeometry args={[SUN_RADIUS, 48, 48]} />
+        <sphereGeometry args={[SUN_RADIUS, 32, 32]} />
         <shaderMaterial
           uniforms={coronaOuter}
           vertexShader={coronaVertex}

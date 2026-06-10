@@ -78,7 +78,7 @@ export function Mars({
     <group ref={groupRef} {...handlers}>
       <group rotation={[0, 0, axialTilt]}>
         <mesh ref={meshRef}>
-          <sphereGeometry args={[radius, 64, 64]} />
+          <sphereGeometry args={[radius, 48, 48]} />
           <shaderMaterial
             ref={matRef}
             uniforms={uniforms}
@@ -89,7 +89,7 @@ export function Mars({
         </mesh>
 
         <mesh scale={1.06}>
-          <sphereGeometry args={[radius, 36, 36]} />
+          <sphereGeometry args={[radius, 24, 24]} />
           <shaderMaterial
             uniforms={atmosUniforms}
             vertexShader={atmosphereVertex}

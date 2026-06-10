@@ -112,7 +112,7 @@ export function Earth({
     <group ref={groupRef} {...handlers}>
       <group rotation={[0, 0, axialTilt]}>
         <mesh ref={surfaceRef}>
-          <sphereGeometry args={[radius, 96, 96]} />
+          <sphereGeometry args={[radius, 64, 64]} />
           <shaderMaterial
             ref={surfaceMatRef}
             uniforms={surfaceUniforms}
@@ -122,7 +122,7 @@ export function Earth({
         </mesh>
 
         <mesh ref={cloudsRef} scale={1.013}>
-          <sphereGeometry args={[radius, 64, 64]} />
+          <sphereGeometry args={[radius, 48, 48]} />
           <shaderMaterial
             ref={cloudsMatRef}
             uniforms={cloudsUniforms}
@@ -134,7 +134,7 @@ export function Earth({
         </mesh>
 
         <mesh scale={1.085}>
-          <sphereGeometry args={[radius, 48, 48]} />
+          <sphereGeometry args={[radius, 32, 32]} />
           <shaderMaterial
             uniforms={atmosUniforms}
             vertexShader={atmosphereVertex}

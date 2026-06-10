@@ -65,7 +65,7 @@ export function Mercury({
     <group ref={groupRef} {...handlers}>
       <group rotation={[0, 0, axialTilt]}>
         <mesh ref={meshRef}>
-          <sphereGeometry args={[radius, 56, 56]} />
+          <sphereGeometry args={[radius, 40, 40]} />
           <shaderMaterial
             ref={matRef}
             uniforms={uniforms}

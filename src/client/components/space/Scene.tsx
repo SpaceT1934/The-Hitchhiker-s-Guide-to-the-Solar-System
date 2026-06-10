@@ -55,7 +55,7 @@ export function Scene() {
         toneMappingExposure: 1.05,
         outputColorSpace: THREE.SRGBColorSpace
       }}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
     >
       <color attach="background" args={['#04060c']} />
 

@@ -92,7 +92,7 @@ export function Saturn({
     <group ref={groupRef} {...handlers}>
       <group rotation={[0, 0, axialTilt]}>
         <mesh ref={surfaceRef}>
-          <sphereGeometry args={[radius, 80, 80]} />
+          <sphereGeometry args={[radius, 56, 56]} />
           <shaderMaterial
             ref={surfaceMatRef}
             uniforms={surfaceUniforms}
@@ -102,7 +102,7 @@ export function Saturn({
         </mesh>
 
         <mesh scale={1.04}>
-          <sphereGeometry args={[radius, 48, 48]} />
+          <sphereGeometry args={[radius, 32, 32]} />
           <shaderMaterial
             uniforms={atmosUniforms}
             vertexShader={atmosphereVertex}

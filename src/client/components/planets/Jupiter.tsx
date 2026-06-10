@@ -74,7 +74,7 @@ export function Jupiter({
     <group ref={groupRef} {...handlers}>
       <group rotation={[0, 0, axialTilt]}>
         <mesh ref={meshRef}>
-          <sphereGeometry args={[radius, 80, 80]} />
+          <sphereGeometry args={[radius, 56, 56]} />
           <shaderMaterial
             ref={matRef}
             uniforms={uniforms}
@@ -84,7 +84,7 @@ export function Jupiter({
         </mesh>
 
         <mesh scale={1.045}>
-          <sphereGeometry args={[radius, 48, 48]} />
+          <sphereGeometry args={[radius, 32, 32]} />
           <shaderMaterial
             uniforms={atmosUniforms}
             vertexShader={atmosphereVertex}

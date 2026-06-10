@@ -68,7 +68,7 @@ export function Moon({
   return (
     <group ref={groupRef} {...handlers}>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[radius, 56, 56]} />
+        <sphereGeometry args={[radius, 40, 40]} />
         <shaderMaterial
           ref={matRef}
           uniforms={uniforms}
