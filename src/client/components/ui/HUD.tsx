@@ -1,7 +1,6 @@
 'use client';
 
 import { PLANET_LABELS, useSceneStore } from '@/client/store/sceneStore';
-import { SPACECRAFT } from '@/client/data/journeyInventory';
 import { PlanetCard } from './PlanetCard';
 import { ArtifactCard } from './ArtifactCard';
 import { VoyagePlot } from './VoyagePlot';
@@ -34,13 +33,11 @@ export function HUD() {
 
   const brandLine = inVoyage
     ? voyageFrom && voyageTo
-      ? `传送中 · ${PLANET_LABELS[voyageFrom]} → ${PLANET_LABELS[voyageTo]}`
-      : '传送中 · In transit'
-    : focusedArtifact
-      ? `观察中 · ${SPACECRAFT[focusedArtifact].name}`
-      : focused
-        ? `观察中 · ${PLANET_LABELS[focused]}`
-        : '太阳系漫游指南 · Solar System Guide';
+      ? `${PLANET_LABELS[voyageFrom]} → ${PLANET_LABELS[voyageTo]}`
+      : 'In transit'
+    : focused || focusedArtifact
+      ? '观察中 · Observing'
+      : '太阳系漫游指南 · Solar System Guide';
 
   // Brand line + full HUD hides during Navigator prompt / loading / preview.
   // But the top-left science card stays visible during journey (running) —
