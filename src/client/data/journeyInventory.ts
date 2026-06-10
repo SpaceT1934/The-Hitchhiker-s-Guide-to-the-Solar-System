@@ -107,7 +107,11 @@ export const SPACECRAFT_IDS = Object.keys(SPACECRAFT) as SpacecraftId[];
 export function buildPlanetsBlock(): string {
   return PLANET_IDS.map((id) => {
     const f = PLANET_FACTS[id];
-    return `  - ${id}（${f.nameZh} / ${f.nameEn}）— ${f.description}`;
+    const factSummary = f.facts.map(([k, v]) => `${k}:${v}`).join(' · ');
+    return `  - ${id}（${f.nameZh}/${f.nameEn}·${f.category}）
+      ${f.description}
+      关键数据: ${factSummary}
+      亮点: ${f.highlight}`;
   }).join('\n');
 }
 
