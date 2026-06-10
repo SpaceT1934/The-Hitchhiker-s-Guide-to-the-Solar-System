@@ -4,7 +4,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -89,9 +88,6 @@ type SceneStore = {
    *  once? Drives the VoyagePlot layout: false → big centered hero with
    *  recommendation; true → compact bottom-right pills. */
   hasUsedChoice: boolean;
-  /** Mute the TTS narration during journey playback. Persisted in
-   *  localStorage so the user's preference survives page reload. */
-  audioMuted: boolean;
   setFocused: (id: PlanetId | null) => void;
   setFocusedArtifact: (id: SpacecraftId | null) => void;
   setVoyageFrom: (id: PlanetId | null) => void;
@@ -104,7 +100,6 @@ type SceneStore = {
   setLibraryOpen: (open: boolean) => void;
   setLibraryFilter: (filter: PlanetId | 'all') => void;
   setHasUsedChoice: (v: boolean) => void;
-  setAudioMuted: (v: boolean) => void;
   startVoyage: () => void;
   completeVoyage: () => void;
   cancelVoyage: () => void;
@@ -129,20 +124,6 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
   const [libraryOpen, setLibraryOpen] = useState<boolean>(false);
   const [libraryFilter, setLibraryFilter] = useState<PlanetId | 'all'>('all');
   const [hasUsedChoice, setHasUsedChoice] = useState<boolean>(false);
-  // audioMuted starts unmuted; if user previously muted, the first effect
-  // hydrates from localStorage. SSR-safe (typeof window guard).
-  const [audioMuted, setAudioMutedState] = useState<boolean>(false);
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const stored = window.localStorage.getItem('solar-guide:audioMuted');
-    if (stored === '1') setAudioMutedState(true);
-  }, []);
-  const setAudioMuted = useCallback((v: boolean) => {
-    setAudioMutedState(v);
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('solar-guide:audioMuted', v ? '1' : '0');
-    }
-  }, []);
 
   const planets = useRef<Map<PlanetId, PlanetInfo>>(new Map()).current;
   const artifacts = useRef<Map<SpacecraftId, ArtifactInfo>>(new Map()).current;
@@ -179,7 +160,6 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
       libraryOpen,
       libraryFilter,
       hasUsedChoice,
-      audioMuted,
       planets,
       artifacts,
       controlsRef,
@@ -195,7 +175,6 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
       setLibraryOpen,
       setLibraryFilter,
       setHasUsedChoice,
-      setAudioMuted,
       startVoyage,
       completeVoyage,
       cancelVoyage
@@ -214,7 +193,6 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
       libraryOpen,
       libraryFilter,
       hasUsedChoice,
-      audioMuted,
       planets,
       artifacts,
       controlsRef,
