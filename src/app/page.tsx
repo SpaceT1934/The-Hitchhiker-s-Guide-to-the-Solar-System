@@ -7,7 +7,6 @@ import { Navigator } from '@/client/components/navigator/Navigator';
 import { JourneyPreview } from '@/client/components/navigator/JourneyPreview';
 import { JourneyController } from '@/client/components/navigator/JourneyController';
 import { JourneySummary } from '@/client/components/navigator/JourneySummary';
-import { JourneyFocusIndicator } from '@/client/components/navigator/JourneyFocusIndicator';
 import { SceneStoreProvider } from '@/client/store/sceneStore';
 
 const Scene = dynamic(
@@ -24,7 +23,6 @@ export default function Page() {
       <main className="fixed inset-0 overflow-hidden bg-deep">
         <Scene />
         <HUD />
-        <JourneyFocusIndicator />
         <JourneyController />
         <Navigator />
         <JourneyPreview />
