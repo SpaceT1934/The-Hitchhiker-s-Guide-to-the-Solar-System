@@ -7,7 +7,7 @@ import type { PlanetId } from '@/client/store/sceneStore';
 const P = '/textures/picture';
 
 export const POSTERS_BY_PLANET: Record<PlanetId, string[]> = {
-  mercury: [`${P}/太阳浩劫.jpg`],
+  mercury: [],
   venus: [],
   earth: [
     `${P}/地心引力.jpg`,
@@ -44,7 +44,8 @@ export const POSTERS_BY_PLANET: Record<PlanetId, string[]> = {
   ],
   saturn: [`${P}/星际穿越.png`],
   uranus: [],
-  neptune: [`${P}/星际探索.jpg`]
+  neptune: [`${P}/星际探索.jpg`],
+  sun: [`${P}/太阳浩劫.jpg`]
 };
 
 // Per-planet visual tuning. baseHeight tunes physical poster size;
@@ -60,7 +61,8 @@ export const POSTER_PLACEMENT: Record<PlanetId, { baseHeight: number; orbitBase:
   jupiter: { baseHeight: 1.80, orbitBase: 8.5 },
   saturn:  { baseHeight: 2.40, orbitBase: 14.5 },
   uranus:  { baseHeight: 1.25, orbitBase: 6.5 },
-  neptune: { baseHeight: 1.25, orbitBase: 6.5 }
+  neptune: { baseHeight: 1.25, orbitBase: 6.5 },
+  sun:     { baseHeight: 2.8, orbitBase: 18 }
 };
 
 // Reverse index: poster path → its associated planet. Built once at module

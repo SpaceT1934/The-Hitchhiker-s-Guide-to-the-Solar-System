@@ -30,7 +30,8 @@ const PLANET_ORDER: PlanetId[] = [
   'jupiter',
   'saturn',
   'uranus',
-  'neptune'
+  'neptune',
+  'sun'
 ];
 
 // Spacecraft host planet → all spacecraft on that body. Pre-computed so
@@ -388,7 +389,8 @@ function planetShortLabel(p: PlanetId): string {
     jupiter: '木星',
     saturn: '土星',
     uranus: '天王星',
-    neptune: '海王星'
+    neptune: '海王星',
+    sun: '太阳'
   };
   return m[p];
 }

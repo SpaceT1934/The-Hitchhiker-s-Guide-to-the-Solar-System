@@ -24,7 +24,8 @@ export type PlanetId =
   | 'jupiter'
   | 'saturn'
   | 'uranus'
-  | 'neptune';
+  | 'neptune'
+  | 'sun';
 
 export type PlanetInfo = {
   id: PlanetId;
@@ -55,7 +56,8 @@ export const PLANET_LABELS: Record<PlanetId, string> = {
   jupiter: 'Jupiter',
   saturn: 'Saturn',
   uranus: 'Uranus',
-  neptune: 'Neptune'
+  neptune: 'Neptune',
+  sun: 'Sun'
 };
 
 export type SceneStatus = 'overview' | 'voyaging';

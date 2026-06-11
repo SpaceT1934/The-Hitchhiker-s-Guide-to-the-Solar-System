@@ -5,12 +5,17 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 import { sunVertex, sunFragment, coronaVertex, coronaFragment } from '@/client/shaders/sun';
+import { usePlanetInteraction } from '@/client/hooks/usePlanetInteraction';
 
 const SUN_RADIUS = 11;
+const APPROACH = 38;
 
 export function Sun() {
+  const groupRef = useRef<THREE.Group>(null);
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const meshRef = useRef<THREE.Mesh>(null);
+
+  const { handlers } = usePlanetInteraction('sun', groupRef, APPROACH, SUN_RADIUS);
 
   const uniforms = useMemo(
     () => ({
@@ -46,7 +51,7 @@ export function Sun() {
   });
 
   return (
-    <group>
+    <group ref={groupRef} {...handlers}>
       <mesh ref={meshRef}>
         <sphereGeometry args={[SUN_RADIUS, 64, 64]} />
         <shaderMaterial

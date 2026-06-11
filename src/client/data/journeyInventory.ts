@@ -16,7 +16,8 @@ export const PLANET_IDS: PlanetId[] = [
   'jupiter',
   'saturn',
   'uranus',
-  'neptune'
+  'neptune',
+  'sun'
 ];
 
 type SpacecraftInfo = {
