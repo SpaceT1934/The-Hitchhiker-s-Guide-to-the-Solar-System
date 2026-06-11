@@ -10,6 +10,7 @@ import {
 import { PLANET_BY_POSTER, POSTERS_BY_PLANET } from '@/client/data/postersData';
 import { MOVIES_BY_PATH } from '@/client/data/movieInfo';
 import { SPACECRAFT, SPACECRAFT_IDS } from '@/client/data/journeyInventory';
+import { BOOKS, BOOKS_BY_PLANET, type BookInfo } from '@/client/data/bookInfo';
 import type { SpacecraftId } from '@/shared/journey';
 
 // LibraryPanel — right-side curated index. Two columns of films and
@@ -191,7 +192,8 @@ export function LibraryPanel() {
           {planetsToShow.map((planetId, sectionIdx) => {
             const films = POSTERS_BY_PLANET[planetId] ?? [];
             const ships = SPACECRAFT_BY_PLANET[planetId] ?? [];
-            if (films.length === 0 && ships.length === 0) return null;
+            const books = BOOKS_BY_PLANET[planetId] ?? [];
+            if (films.length === 0 && ships.length === 0 && books.length === 0) return null;
 
             const showSectionLabel = libraryFilter === 'all';
 
@@ -227,6 +229,10 @@ export function LibraryPanel() {
                       onClick={() => onPickFilm(path)}
                     />
                   ))}
+                  {/* Books */}
+                  {books.map((book) => (
+                    <BookCard key={book.titleZh} book={book} />
+                  ))}
                 </div>
               </div>
             );
@@ -235,7 +241,8 @@ export function LibraryPanel() {
           {planetsToShow.every(
             (p) =>
               (POSTERS_BY_PLANET[p]?.length ?? 0) === 0 &&
-              (SPACECRAFT_BY_PLANET[p]?.length ?? 0) === 0
+              (SPACECRAFT_BY_PLANET[p]?.length ?? 0) === 0 &&
+              (BOOKS_BY_PLANET[p]?.length ?? 0) === 0
           ) && (
             <div className="text-stardust/30 text-[11px] tracking-wider2 leading-relaxed text-center mt-12">
               这颗星球暂无关联资料。
@@ -376,6 +383,37 @@ function SpacecraftCard({
   );
 }
 
+function BookCard({ book }: { book: BookInfo }) {
+  return (
+    <div className="group text-left transition-all duration-500 ease-out">
+      <div
+        className={`aspect-[2/3] flex flex-col justify-between p-3 border bg-deep/60 transition-all duration-500 border-stardust/12 group-hover:border-stardust/40`}
+      >
+        <div className="flex items-start justify-between">
+          <span className="block w-1.5 h-1.5 rounded-full bg-amber-400/50 group-hover:bg-amber-400/80 transition-colors duration-500" />
+          <span className="text-stardust/30 text-[8px] tracking-cosmic uppercase">
+            {book.kind === 'fiction' ? '小说' : '科普'}
+          </span>
+        </div>
+        <div>
+          <div className="text-stardust/95 text-[14px] tracking-wider2 font-light leading-tight line-clamp-2">
+            {book.titleZh}
+          </div>
+          <div className="mt-1 text-stardust/40 text-[9px] tracking-cosmic uppercase truncate">
+            {book.author}
+          </div>
+        </div>
+      </div>
+      <div className="mt-2 text-stardust/55 group-hover:text-stardust/85 text-[10px] tracking-cosmic uppercase truncate transition-colors duration-300">
+        书籍
+      </div>
+      <div className="mt-0.5 text-stardust/25 text-[9px] tracking-wider2">
+        {book.year}
+      </div>
+    </div>
+  );
+}
+
 // ----------------------------- Helpers -----------------------------
 
 function planetShortLabel(p: PlanetId): string {
@@ -404,10 +442,12 @@ function countTotal(filter: PlanetId | 'all'): number {
     let n = 0;
     for (const arr of Object.values(POSTERS_BY_PLANET)) n += arr.length;
     n += SPACECRAFT_IDS.length;
+    n += BOOKS.length;
     return n;
   }
   return (
     (POSTERS_BY_PLANET[filter]?.length ?? 0) +
-    (SPACECRAFT_BY_PLANET[filter]?.length ?? 0)
+    (SPACECRAFT_BY_PLANET[filter]?.length ?? 0) +
+    (BOOKS_BY_PLANET[filter]?.length ?? 0)
   );
 }

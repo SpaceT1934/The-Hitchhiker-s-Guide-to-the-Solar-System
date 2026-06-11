@@ -4,6 +4,7 @@
 
 import { MOVIES_BY_PATH } from './movieInfo';
 import { PLANET_FACTS } from './planetInfo';
+import { BOOKS } from './bookInfo';
 import type { PlanetId } from '@/client/store/sceneStore';
 import type { SpacecraftId } from '@/shared/journey';
 
@@ -164,6 +165,15 @@ export function buildSpacecraftBlock(): string {
       ${s.description}
       详情: ${s.detail}`;
   }).join('\n');
+}
+
+export function buildBooksBlock(): string {
+  return BOOKS.map(
+    (b) =>
+      `  - ${b.titleZh}《${b.titleEn}》${b.author}·${b.year}·${b.kind === 'fiction' ? '小说' : '科普'}
+      简介: ${b.description}
+      关联: ${b.planet}`
+  ).join('\n');
 }
 
 export function buildFilmsBlock(): string {

@@ -1,7 +1,7 @@
 // LLM prompt construction for the AI Navigator.
 // Server-only — never imported on the client.
 
-import { buildFilmsBlock, buildPlanetsBlock, buildSpacecraftBlock } from '@/client/data/journeyInventory';
+import { buildBooksBlock, buildFilmsBlock, buildPlanetsBlock, buildSpacecraftBlock } from '@/client/data/journeyInventory';
 
 export const SYSTEM_PROMPT = `你是太阳系漫游指南的科普导览员——一个虚实融合的 3D 太阳系教育体验里的向导。
 用户告诉你 ta 想了解的天文问题或感兴趣的太空主题,你的任务是从下方"可去之地"里策划一条 4-5 站的科学探索路线,并从"科幻电影库"中推荐与之共鸣的影片,让科学认知与人类想象交汇。
@@ -16,6 +16,9 @@ export const SYSTEM_PROMPT = `你是太阳系漫游指南的科普导览员—�
 
 【科幻电影库】(只能从这份清单里选,不要捏造)
 {FILMS}
+
+【科幻文学与科普读物】(供你在旁白中提及,丰富推荐内容)
+{BOOKS}
 
 【输出格式·严格 JSON】
 {
@@ -54,5 +57,6 @@ export function buildSystemPrompt(): string {
   return SYSTEM_PROMPT
     .replace('{PLANETS}', buildPlanetsBlock())
     .replace('{SPACECRAFT}', buildSpacecraftBlock())
-    .replace('{FILMS}', buildFilmsBlock());
+    .replace('{FILMS}', buildFilmsBlock())
+    .replace('{BOOKS}', buildBooksBlock());
 }
