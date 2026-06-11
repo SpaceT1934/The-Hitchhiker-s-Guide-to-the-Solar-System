@@ -42,11 +42,29 @@ export function BookPanel() {
             ×
           </button>
 
-          <div className="flex-shrink-0 w-[78px] h-[110px] border border-amber-400/20 flex flex-col items-center justify-center gap-1 bg-amber-400/[0.02]">
-            <span className="text-amber-400/70 text-[9px] tracking-cosmic uppercase">
-              {book.kind === 'fiction' ? '小说' : '科普'}
-            </span>
-            <span className="text-amber-400/40 text-[24px]">📖</span>
+          {/* Miniature book cover matching Library card style */}
+          <div className="flex-shrink-0 w-[78px] h-[110px] flex border border-amber-400/20 overflow-hidden shadow-[0_0_20px_rgba(251,191,36,0.08)]">
+            <div
+              className="w-[5px] flex-shrink-0"
+              style={{ backgroundColor: book.kind === 'fiction' ? '#8b6914' : '#1e4660' }}
+            />
+            <div
+              className="flex-1 flex flex-col justify-between p-2"
+              style={{ backgroundColor: book.kind === 'fiction' ? '#1a1410' : '#0d1117' }}
+            >
+              <span className="text-stardust/20 text-[6px] tracking-cosmic uppercase">
+                {book.kind === 'fiction' ? 'Fiction' : 'Non-Fiction'}
+              </span>
+              <div
+                className="text-stardust/90 text-[9px] tracking-wider2 font-light leading-tight text-center line-clamp-3"
+                style={{ textShadow: book.kind === 'fiction' ? '0 1px 3px rgba(251,191,36,0.15)' : '0 1px 3px rgba(56,189,248,0.12)' }}
+              >
+                {book.titleZh}
+              </div>
+              <span className="text-stardust/30 text-[7px] tabular-nums tracking-wider2 text-right">
+                {book.year}
+              </span>
+            </div>
           </div>
 
           <div className="flex-1 min-w-0 pr-4">
