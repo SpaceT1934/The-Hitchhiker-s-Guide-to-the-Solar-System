@@ -396,7 +396,22 @@ function SpacecraftCard({
   );
 }
 
+const BOOK_COLORS: Record<string, { bg: string; spine: string; accent: string }> = {
+  fiction:    { bg: '#1a1410', spine: '#8b6914', accent: 'rgba(251,191,36,0.25)' },
+  nonfiction: { bg: '#0d1117', spine: '#1e4660', accent: 'rgba(56,189,248,0.2)' },
+};
+
+function BookIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-stardust/40">
+      <path d="M2 2h4a2 2 0 0 1 2 2v8a1 1 0 0 0-1-1H2V2z" />
+      <path d="M12 2H8a2 2 0 0 0-2 2v8a1 1 0 0 1 1-1h5V2z" />
+    </svg>
+  );
+}
+
 function BookCard({ book, active, onClick }: { book: BookInfo; active: boolean; onClick: () => void }) {
+  const c = BOOK_COLORS[book.kind];
   return (
     <button
       type="button"
@@ -405,35 +420,50 @@ function BookCard({ book, active, onClick }: { book: BookInfo; active: boolean; 
         active ? 'opacity-100' : 'opacity-90 hover:opacity-100'
       }`}
     >
+      {/* Book cover */}
       <div
-        className={`aspect-[2/3] overflow-hidden flex flex-col justify-between p-3 border bg-deep transition-all duration-500 ${
+        className={`aspect-[2/3] overflow-hidden flex border transition-all duration-500 ${
           active
-            ? 'border-amber-400/40 shadow-[0_0_20px_rgba(251,191,36,0.1)]'
-            : 'border-stardust/10 group-hover:border-stardust/35'
+            ? 'border-amber-400/30 shadow-[0_0_24px_rgba(251,191,36,0.12)]'
+            : 'border-stardust/10 group-hover:border-stardust/30'
         }`}
       >
-        <div className="flex items-start justify-between">
-          <span className={`block w-1.5 h-1.5 rounded-full transition-colors duration-500 ${
-            active ? 'bg-amber-400' : 'bg-amber-400/50 group-hover:bg-amber-400/80'
-          }`} />
-          <span className="text-stardust/30 text-[8px] tracking-cosmic uppercase">
-            {book.kind === 'fiction' ? '小说' : '科普'}
-          </span>
-        </div>
-        <div>
-          <div className="text-stardust/95 text-[14px] tracking-wider2 font-light leading-tight line-clamp-3">
-            {book.titleZh}
+        {/* Book spine (left edge) */}
+        <div className="w-[6px] flex-shrink-0" style={{ backgroundColor: c.spine }} />
+
+        {/* Cover body */}
+        <div className="flex-1 flex flex-col justify-between p-3" style={{ backgroundColor: c.bg }}>
+          {/* Top: kind icon */}
+          <div className="flex items-start justify-between">
+            <BookIcon />
+            <span className="text-stardust/20 text-[7px] tracking-cosmic uppercase">
+              {book.kind === 'fiction' ? 'Fiction' : 'Non-Fiction'}
+            </span>
           </div>
-          <div className="mt-1 text-stardust/40 text-[9px] tracking-cosmic uppercase truncate">
-            {book.author}
+          {/* Middle: title + author */}
+          <div>
+            <div
+              className="text-stardust/95 text-[14px] tracking-wider2 font-light leading-tight line-clamp-3"
+              style={{ textShadow: `0 1px 4px ${c.accent}` }}
+            >
+              {book.titleZh}
+            </div>
+            <div className="mt-2 text-stardust/40 text-[9px] tracking-cosmic uppercase truncate">
+              {book.author}
+            </div>
+          </div>
+          {/* Bottom: year */}
+          <div className="text-stardust/25 text-[9px] tabular-nums tracking-wider2">
+            {book.year}
           </div>
         </div>
       </div>
+      {/* Label below */}
       <div className="mt-2 text-stardust/55 group-hover:text-stardust/85 text-[10px] tracking-cosmic uppercase truncate transition-colors duration-300">
         书籍
       </div>
       <div className="mt-0.5 text-stardust/25 text-[9px] tracking-wider2">
-        {book.year}
+        {book.kind === 'fiction' ? '科幻小说' : '科普读物'}
       </div>
     </button>
   );
