@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas, useFrame, type ThreeEvent } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useProgress } from '@react-three/drei';
 import { Suspense, useCallback, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -54,27 +54,50 @@ function Voyager() {
   );
 }
 
+// Loading screen shown while 3D assets load
+function LoadingOverlay() {
+  const { progress, active } = useProgress();
+  if (!active) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-deep pointer-events-none">
+      <div className="text-center">
+        <div className="text-stardust/40 text-[11px] tracking-cosmic uppercase">
+          Loading Solar System…
+        </div>
+        <div className="mt-3 h-px w-32 mx-auto bg-stardust/15">
+          <div
+            className="h-px bg-stardust/60 transition-all duration-300 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Scene() {
   return (
-    <Canvas
-      className="absolute inset-0"
-      camera={{ position: [60, 42, 260], fov: 42, near: 0.1, far: 6000 }}
-      gl={{
-        antialias: true,
-        powerPreference: 'high-performance',
-        toneMapping: THREE.ACESFilmicToneMapping,
-        toneMappingExposure: 1.05,
-        outputColorSpace: THREE.SRGBColorSpace
-      }}
-      dpr={[1, 1.5]}
-    >
-      <color attach="background" args={['#04060c']} />
+    <>
+      <LoadingOverlay />
+      <Canvas
+        className="absolute inset-0"
+        camera={{ position: [60, 42, 260], fov: 42, near: 0.1, far: 6000 }}
+        gl={{
+          antialias: true,
+          powerPreference: 'high-performance',
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.05,
+          outputColorSpace: THREE.SRGBColorSpace
+        }}
+        dpr={[1, 1.5]}
+      >
+        <color attach="background" args={['#04060c']} />
 
-      {/* GLB spacecraft models need lights — our planet shaders ignore them. */}
-      <pointLight position={[0, 0, 0]} intensity={2.4} color="#ffe6b0" distance={0} decay={0} />
-      <ambientLight intensity={0.18} color="#7d8aa0" />
+        {/* GLB spacecraft models need lights — our planet shaders ignore them. */}
+        <pointLight position={[0, 0, 0]} intensity={2.4} color="#ffe6b0" distance={0} decay={0} />
+        <ambientLight intensity={0.18} color="#7d8aa0" />
 
-      <Suspense fallback={null}>
+        <Suspense fallback={null}>
         <Nebula />
         <Starfield />
 
@@ -196,5 +219,6 @@ export function Scene() {
         <PostFX />
       </Suspense>
     </Canvas>
+    </>
   );
 }
