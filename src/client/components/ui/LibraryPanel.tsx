@@ -102,6 +102,11 @@ export function LibraryPanel() {
     setFocusedArtifact(id);
   };
 
+  const onPickBook = (book: BookInfo) => {
+    setFocusedArtifact(null);
+    setFocused(book.planet);
+  };
+
   const planetsWithContent = PLANET_ORDER.filter(
     (p) =>
       (POSTERS_BY_PLANET[p]?.length ?? 0) > 0 ||
@@ -231,7 +236,12 @@ export function LibraryPanel() {
                   ))}
                   {/* Books */}
                   {books.map((book) => (
-                    <BookCard key={book.titleZh} book={book} />
+                    <BookCard
+                      key={book.titleZh}
+                      book={book}
+                      active={focused === book.planet && !focusedArtifact}
+                      onClick={() => onPickBook(book)}
+                    />
                   ))}
                 </div>
               </div>
@@ -383,14 +393,24 @@ function SpacecraftCard({
   );
 }
 
-function BookCard({ book }: { book: BookInfo }) {
+function BookCard({ book, active, onClick }: { book: BookInfo; active: boolean; onClick: () => void }) {
   return (
-    <div className="group text-left transition-all duration-500 ease-out">
+    <button
+      type="button"
+      onClick={onClick}
+      className="group text-left transition-all duration-500 ease-out"
+    >
       <div
-        className={`aspect-[2/3] flex flex-col justify-between p-3 border bg-deep/60 transition-all duration-500 border-stardust/12 group-hover:border-stardust/40`}
+        className={`aspect-[2/3] flex flex-col justify-between p-3 border bg-deep/60 transition-all duration-500 ${
+          active
+            ? 'border-amber-400/40 shadow-[0_0_20px_rgba(251,191,36,0.1)]'
+            : 'border-stardust/12 group-hover:border-stardust/40'
+        }`}
       >
         <div className="flex items-start justify-between">
-          <span className="block w-1.5 h-1.5 rounded-full bg-amber-400/50 group-hover:bg-amber-400/80 transition-colors duration-500" />
+          <span className={`block w-1.5 h-1.5 rounded-full transition-colors duration-500 ${
+            active ? 'bg-amber-400' : 'bg-amber-400/50 group-hover:bg-amber-400/80'
+          }`} />
           <span className="text-stardust/30 text-[8px] tracking-cosmic uppercase">
             {book.kind === 'fiction' ? '小说' : '科普'}
           </span>
@@ -410,7 +430,7 @@ function BookCard({ book }: { book: BookInfo }) {
       <div className="mt-0.5 text-stardust/25 text-[9px] tracking-wider2">
         {book.year}
       </div>
-    </div>
+    </button>
   );
 }
 
