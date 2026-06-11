@@ -2,10 +2,25 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { useSceneStore } from '@/client/store/sceneStore';
+import { useSceneStore, PLANET_LABELS } from '@/client/store/sceneStore';
+import { SPACECRAFT } from '@/client/data/journeyInventory';
 
 import { Subtitle } from './Subtitle';
 import { StopCard } from './StopCard';
+
+// Strip the subject name from narration if the LLM included it.
+// The name is already shown in the top-left card.
+function cleanNarration(raw: string, stop: { target: { kind: string; id: string } }): string {
+  let name = '';
+  if (stop.target.kind === 'planet') {
+    name = PLANET_LABELS[stop.target.id as keyof typeof PLANET_LABELS] ?? '';
+  } else {
+    name = SPACECRAFT[stop.target.id as keyof typeof SPACECRAFT]?.name ?? '';
+  }
+  if (!name) return raw;
+  // Remove the name if it appears at the start, optionally followed by Chinese punctuation
+  return raw.replace(new RegExp(`^${name}[，。、；：]?\\s*`), '');
+}
 
 // JourneyController — drives the running phase of a Journey.
 //
@@ -126,7 +141,7 @@ export function JourneyController() {
         </button>
       </div>
 
-      <Subtitle text={displayActive ? stop.narration : null} />
+      <Subtitle text={displayActive ? cleanNarration(stop.narration, stop) : null} />
       <StopCard
         stop={displayActive ? stop : null}
         index={journeyStopIndex}
