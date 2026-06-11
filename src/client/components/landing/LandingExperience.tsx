@@ -58,7 +58,7 @@ export function LandingExperience() {
         <div className="text-center max-w-[680px] relative z-10">
           {/* Main title */}
           <h1
-            className="text-stardust/95 font-thin text-[36px] md:text-[42px] leading-[1.2] tracking-wider2"
+            className="text-stardust/95 font-light text-[36px] md:text-[42px] leading-[1.2] tracking-wider2"
             style={{ textShadow: '0 0 60px rgba(155,216,255,0.15)' }}
           >
             太阳系漫游指南
@@ -77,10 +77,10 @@ export function LandingExperience() {
           </div>
 
           {/* Tagline */}
-          <p className="mt-10 text-stardust/55 font-thin text-[17px] md:text-[19px] leading-relaxed tracking-wider2">
+          <p className="mt-10 text-stardust/55 font-light text-[17px] md:text-[19px] leading-relaxed tracking-wider2">
             科学从提问开始，想象力带我们抵达星辰
           </p>
-          <p className="mt-3 text-stardust/30 font-thin text-[13px] leading-relaxed tracking-wider2">
+          <p className="mt-3 text-stardust/30 font-light text-[13px] leading-relaxed tracking-wider2">
             每一颗行星都有两个故事 —— 一个属于科学，一个属于想象
           </p>
 
@@ -89,7 +89,7 @@ export function LandingExperience() {
             <button
               type="button"
               onClick={onEnter}
-              className="group relative px-20 py-5 bg-transparent border border-stardust/30 hover:border-stardust/60 text-stardust/90 hover:text-stardust text-[15px] tracking-cosmic uppercase font-thin transition-all duration-1000 ease-out"
+              className="group relative px-20 py-5 bg-transparent border border-stardust/30 hover:border-stardust/60 text-stardust/90 hover:text-stardust text-[15px] tracking-cosmic uppercase font-light transition-all duration-1000 ease-out"
               style={{ boxShadow: '0 0 100px rgba(155,216,255,0.08)' }}
             >
               <span className="relative z-10">进入太阳系 · Enter</span>
