@@ -401,13 +401,15 @@ function BookCard({ book, active, onClick }: { book: BookInfo; active: boolean; 
     <button
       type="button"
       onClick={onClick}
-      className="group text-left transition-all duration-500 ease-out"
+      className={`group text-left transition-all duration-500 ease-out ${
+        active ? 'opacity-100' : 'opacity-90 hover:opacity-100'
+      }`}
     >
       <div
-        className={`aspect-[2/3] flex flex-col justify-between p-3 border bg-deep/60 transition-all duration-500 ${
+        className={`aspect-[2/3] overflow-hidden flex flex-col justify-between p-3 border bg-deep transition-all duration-500 ${
           active
             ? 'border-amber-400/40 shadow-[0_0_20px_rgba(251,191,36,0.1)]'
-            : 'border-stardust/12 group-hover:border-stardust/40'
+            : 'border-stardust/10 group-hover:border-stardust/35'
         }`}
       >
         <div className="flex items-start justify-between">
@@ -419,7 +421,7 @@ function BookCard({ book, active, onClick }: { book: BookInfo; active: boolean; 
           </span>
         </div>
         <div>
-          <div className="text-stardust/95 text-[14px] tracking-wider2 font-light leading-tight line-clamp-2">
+          <div className="text-stardust/95 text-[14px] tracking-wider2 font-light leading-tight line-clamp-3">
             {book.titleZh}
           </div>
           <div className="mt-1 text-stardust/40 text-[9px] tracking-cosmic uppercase truncate">
