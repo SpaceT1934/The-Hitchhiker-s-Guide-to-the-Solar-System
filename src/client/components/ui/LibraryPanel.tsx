@@ -238,12 +238,12 @@ export function LibraryPanel() {
                     />
                   ))}
                   {/* Books */}
-                  {books.map((book, bi) => (
+                  {books.map((book) => (
                     <BookCard
                       key={book.titleZh}
                       book={book}
-                      active={focused === book.planet && !focusedArtifact && selectedBook === bi}
-                      onClick={() => onPickBook(book, bi)}
+                      active={focused === book.planet && !focusedArtifact && selectedBook === BOOKS.indexOf(book)}
+                      onClick={() => onPickBook(book, BOOKS.indexOf(book))}
                     />
                   ))}
                 </div>
