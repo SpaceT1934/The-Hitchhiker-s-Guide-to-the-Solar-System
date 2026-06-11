@@ -70,7 +70,6 @@ export function PlanetCard() {
 
   const planetId = focused ?? lastFocused.current;
   const data = planetId ? PLANET_FACTS[planetId] : null;
-  if (!data) return null;
 
   const dynamicFacts = useMemo<Array<[string, string]>>(() => {
     if (!planetId) return [];
@@ -84,6 +83,8 @@ export function PlanetCard() {
 
   const allFacts = data ? [...data.facts, ...dynamicFacts] : [];
   const vsEarth = planetId ? compareVsEarth(planetId) : null;
+
+  if (!data) return null;
 
   return (
     <div className="max-w-[280px]">
