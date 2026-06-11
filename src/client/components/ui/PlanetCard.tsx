@@ -70,7 +70,7 @@ export function PlanetCard() {
 
   const planetId = focused ?? lastFocused.current;
   const data = planetId ? PLANET_FACTS[planetId] : null;
-  const visible = focused !== null;
+  if (!data) return null;
 
   const dynamicFacts = useMemo<Array<[string, string]>>(() => {
     if (!planetId) return [];
@@ -86,13 +86,7 @@ export function PlanetCard() {
   const vsEarth = planetId ? compareVsEarth(planetId) : null;
 
   return (
-    <div
-      className={`mt-6 max-w-[280px] transition-opacity duration-700 ease-out ${
-        visible ? 'opacity-100' : 'opacity-0'
-      }`}
-    >
-      {data && (
-        <>
+    <div className="max-w-[280px]">
           <div className="text-stardust/95 text-[26px] tracking-wider2 font-light leading-tight">
             {data.nameZh}
           </div>
@@ -133,8 +127,6 @@ export function PlanetCard() {
           <p className="mt-4 text-stardust/65 text-[11px] leading-relaxed">
             {data.description}
           </p>
-        </>
-      )}
     </div>
   );
 }

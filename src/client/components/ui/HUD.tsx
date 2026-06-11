@@ -31,12 +31,14 @@ export function HUD() {
   const inFocus = status === 'overview' && (focused !== null || focusedArtifact !== null);
   const inOverview = status === 'overview' && focused === null && focusedArtifact === null;
 
-  const brandLine = inVoyage
+  // Only show subtitle text in overview/no-focus or voyage mode.
+  // When a planet/spacecraft IS focused, the card itself shows the name — no need to repeat it.
+  const brandSubtitle = inVoyage
     ? voyageFrom && voyageTo
       ? `${PLANET_LABELS[voyageFrom]} → ${PLANET_LABELS[voyageTo]}`
       : 'In transit'
     : focused || focusedArtifact
-      ? '观察中 · Observing'
+      ? null
       : '太阳系漫游指南 · Solar System Guide';
 
   // Brand line + full HUD hides during Navigator prompt / loading / preview.
@@ -78,22 +80,25 @@ export function HUD() {
             <div className="text-stardust/85 text-xs tracking-cosmic uppercase">
               太阳系漫游指南
             </div>
-            <div className="mt-3 text-stardust/40 text-[10px] tracking-wider2 uppercase">
-              {brandLine}
-            </div>
+            {brandSubtitle && (
+              <div className="mt-3 text-stardust/40 text-[10px] tracking-wider2 uppercase">
+                {brandSubtitle}
+              </div>
+            )}
             <div className="mt-4 h-px w-12 bg-stardust/20" />
-            <div className="mt-4" />
           </>
         )}
 
         {/* Journey progress — only during journey running */}
         {inJourney && journey && (
-          <div className="mb-3 text-stardust/35 text-[9px] tracking-cosmic uppercase tabular-nums">
+          <div className="mt-4 text-stardust/35 text-[9px] tracking-cosmic uppercase tabular-nums">
             第 {String(journeyStopIndex + 1).padStart(2, '0')} 站 / {String(journey.stops.length).padStart(2, '0')}
           </div>
         )}
 
-        {focusedArtifact ? <ArtifactCard /> : <PlanetCard />}
+        <div className="mt-4">
+          {focusedArtifact ? <ArtifactCard /> : <PlanetCard />}
+        </div>
       </div>
 
       {inOverview && <VoyagePlot fadeCls={fadeCls} />}

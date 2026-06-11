@@ -30,48 +30,40 @@ export function ArtifactCard() {
 
   const id = focusedArtifact ?? lastRef.current;
   const data = id ? SPACECRAFT[id] : null;
-  const visible = focusedArtifact !== null;
+  if (!data) return null;
 
   return (
-    <div
-      className={`mt-6 max-w-[260px] transition-opacity duration-700 ease-out ${
-        visible ? 'opacity-100' : 'opacity-0'
-      }`}
-    >
-      {data && (
-        <>
-          <div className="text-stardust/95 text-[24px] tracking-wider2 font-light leading-tight">
-            {data.name}
-          </div>
+    <div className="max-w-[260px]">
+      <div className="text-stardust/95 text-[24px] tracking-wider2 font-light leading-tight">
+        {data.name}
+      </div>
 
-          <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-stardust/45">
-            <span className="tracking-cosmic uppercase">{data.id.replace(/_/g, ' ')}</span>
-            <span className="text-stardust/25">·</span>
-            <span className="tracking-wider2">人类航天器</span>
-          </div>
+      <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-stardust/45">
+        <span className="tracking-cosmic uppercase">{data.id.replace(/_/g, ' ')}</span>
+        <span className="text-stardust/25">·</span>
+        <span className="tracking-wider2">人类航天器</span>
+      </div>
 
-          <div className="mt-5 h-px w-full bg-stardust/15" />
+      <div className="mt-5 h-px w-full bg-stardust/15" />
 
-          <dl className="mt-4 space-y-1.5 text-[11px]">
-            <div className="flex items-baseline justify-between gap-4">
-              <dt className="text-stardust/45 tracking-wider2">所在</dt>
-              <dd className="text-stardust/85 tracking-wider2">
-                {PLANET_LABELS[data.hostPlanet]}
-              </dd>
-            </div>
-            <div className="flex items-baseline justify-between gap-4">
-              <dt className="text-stardust/45 tracking-wider2">状态</dt>
-              <dd className="text-stardust/85 tracking-wider2">{KIND_LABEL[data.kind]}</dd>
-            </div>
-          </dl>
+      <dl className="mt-4 space-y-1.5 text-[11px]">
+        <div className="flex items-baseline justify-between gap-4">
+          <dt className="text-stardust/45 tracking-wider2">所在</dt>
+          <dd className="text-stardust/85 tracking-wider2">
+            {PLANET_LABELS[data.hostPlanet]}
+          </dd>
+        </div>
+        <div className="flex items-baseline justify-between gap-4">
+          <dt className="text-stardust/45 tracking-wider2">状态</dt>
+          <dd className="text-stardust/85 tracking-wider2">{KIND_LABEL[data.kind]}</dd>
+        </div>
+      </dl>
 
-          <div className="mt-5 h-px w-full bg-stardust/15" />
+      <div className="mt-5 h-px w-full bg-stardust/15" />
 
-          <p className="mt-4 text-stardust/65 text-[11px] leading-relaxed">
-            {data.description}
-          </p>
-        </>
-      )}
+      <p className="mt-4 text-stardust/65 text-[11px] leading-relaxed">
+        {data.description}
+      </p>
     </div>
   );
 }
