@@ -1,18 +1,5 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
-
 import { useSceneStore, PLANET_LABELS } from '@/client/store/sceneStore';
 import { SPACECRAFT } from '@/client/data/journeyInventory';
-import type { SpacecraftId } from '@/shared/journey';
-
-// ArtifactCard — appears in place of PlanetCard whenever a spacecraft is
-// focused. Mirrors the PlanetCard visual layout (Chinese name + English
-// label + category + a short fact list + description) so the HUD reads
-// consistently regardless of subject.
-//
-// Holds onto the last-focused artifact during fade-out so the content
-// doesn't blink to empty mid-transition.
 
 const KIND_LABEL: Record<'surface' | 'orbit' | 'deepspace', string> = {
   surface: '表面着陆',
@@ -22,14 +9,8 @@ const KIND_LABEL: Record<'surface' | 'orbit' | 'deepspace', string> = {
 
 export function ArtifactCard() {
   const { focusedArtifact } = useSceneStore();
-  const lastRef = useRef<SpacecraftId | null>(focusedArtifact);
-
-  useEffect(() => {
-    if (focusedArtifact !== null) lastRef.current = focusedArtifact;
-  }, [focusedArtifact]);
-
-  const id = focusedArtifact ?? lastRef.current;
-  const data = id ? SPACECRAFT[id] : null;
+  if (!focusedArtifact) return null;
+  const data = SPACECRAFT[focusedArtifact];
   if (!data) return null;
 
   return (

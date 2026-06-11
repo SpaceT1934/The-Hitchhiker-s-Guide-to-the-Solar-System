@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 
 import { PLANET_FACTS } from '@/client/data/planetInfo';
 import { useSceneStore, type PlanetId } from '@/client/store/sceneStore';
@@ -62,13 +62,8 @@ function compareVsEarth(id: PlanetId): string | null {
 
 export function PlanetCard() {
   const { focused } = useSceneStore();
-  const lastFocused = useRef<PlanetId | null>(focused);
-
-  useEffect(() => {
-    if (focused !== null) lastFocused.current = focused;
-  }, [focused]);
-
-  const planetId = focused ?? lastFocused.current;
+  if (!focused) return null;
+  const planetId = focused;
   const data = planetId ? PLANET_FACTS[planetId] : null;
 
   const dynamicFacts = useMemo<Array<[string, string]>>(() => {
