@@ -1,8 +1,8 @@
 'use client';
 
 import { useGLTF } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useFrame, type ThreeEvent } from '@react-three/fiber';
+import { useCallback, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
 import { useSceneStore, type PlanetId } from '@/client/store/sceneStore';
@@ -11,17 +11,7 @@ import type { SpacecraftId } from '@/shared/journey';
 
 // OrbitArtifact — loads a GLTF spacecraft and puts it in orbit around a
 // planet. Inclined-circle orbit, configurable speed / radius / tilt /
-// phase, optional self-spin.
-//
-//   followPlanet — anchors the orbit to this planet's world position
-//   orbitRadius  — distance from planet centre in scene units
-//   orbitSpeed   — angular velocity (rad/sec)
-//   orbitTilt    — orbital plane inclination (radians, π/2 = polar)
-//   orbitPhase   — initial angle so multiple artifacts spread out
-//   scale        — visual scale on the GLB model
-//   spinSpeed    — self-rotation around model's Y axis (rad/sec)
-//   yaw          — fixed yaw offset applied to the model
-//   artifactId   — register in the scene store for Navigator targeting
+// phase, optional self-spin. Clicking focuses the camera on it.
 
 type Props = {
   modelUrl: string;
@@ -50,7 +40,7 @@ export function OrbitArtifact({
   artifactId,
   approachDistance = 0.8
 }: Props) {
-  const { planets } = useSceneStore();
+  const { planets, status, setFocused, setFocusedArtifact } = useSceneStore();
   const wrapperRef = useRef<THREE.Group>(null);
   const orbiterRef = useRef<THREE.Group>(null);
   const modelRef = useRef<THREE.Group>(null);
@@ -59,6 +49,16 @@ export function OrbitArtifact({
   const cloned = useMemo(() => gltf.scene.clone(true), [gltf.scene]);
 
   useArtifactRegistration(artifactId, orbiterRef, approachDistance);
+
+  const onClick = useCallback(
+    (e: ThreeEvent<MouseEvent>) => {
+      e.stopPropagation();
+      if (status !== 'overview' || !artifactId) return;
+      setFocused(followPlanet);
+      setFocusedArtifact(artifactId);
+    },
+    [artifactId, followPlanet, status, setFocused, setFocusedArtifact]
+  );
 
   useFrame((state, dt) => {
     const info = planets.get(followPlanet);
@@ -85,7 +85,7 @@ export function OrbitArtifact({
   });
 
   return (
-    <group ref={wrapperRef}>
+    <group ref={wrapperRef} onClick={onClick}>
       <group ref={orbiterRef}>
         <group ref={modelRef} rotation={[0, yaw, 0]}>
           <primitive object={cloned} scale={scale} />

@@ -1,8 +1,8 @@
 'use client';
 
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, type ThreeEvent } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import { Suspense, useMemo, useRef } from 'react';
+import { Suspense, useCallback, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
 import { Nebula } from './Nebula';
@@ -24,6 +24,7 @@ import { Uranus } from '@/client/components/planets/Uranus';
 import { Neptune } from '@/client/components/planets/Neptune';
 import { PostFX } from '@/client/components/effects/PostFX';
 import { useArtifactRegistration } from '@/client/hooks/useArtifactRegistration';
+import { useSceneStore } from '@/client/store/sceneStore';
 
 // Voyager 1 sits at a fixed point past Neptune, "leaving the solar system".
 // Just a slow self-rotation, no orbital motion. Registers as an artifact so
@@ -36,8 +37,18 @@ function Voyager() {
   useFrame((_, dt) => {
     if (ref.current) ref.current.rotation.y += dt * 0.04;
   });
+  const { status, setFocused, setFocusedArtifact } = useSceneStore();
+  const onClick = useCallback(
+    (e: ThreeEvent<MouseEvent>) => {
+      e.stopPropagation();
+      if (status !== 'overview') return;
+      setFocused('neptune');
+      setFocusedArtifact('voyager_1');
+    },
+    [status, setFocused, setFocusedArtifact]
+  );
   return (
-    <group ref={ref} position={[255, 35, -130]}>
+    <group ref={ref} position={[255, 35, -130]} onClick={onClick}>
       <primitive object={cloned} scale={1.8} />
     </group>
   );

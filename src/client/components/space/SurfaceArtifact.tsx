@@ -4,7 +4,11 @@ import { useGLTF } from '@react-three/drei';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
+import { useCallback } from 'react';
+import { ThreeEvent } from '@react-three/fiber';
 import { useArtifactRegistration } from '@/client/hooks/useArtifactRegistration';
+import { useSceneStore } from '@/client/store/sceneStore';
+import { SPACECRAFT } from '@/client/data/journeyInventory';
 import type { SpacecraftId } from '@/shared/journey';
 
 // SurfaceArtifact — places a GLTF model on a planet's surface at a real
@@ -76,8 +80,20 @@ export function SurfaceArtifact({
 
   useArtifactRegistration(artifactId, groupRef, approachDistance);
 
+  const { status, setFocused, setFocusedArtifact } = useSceneStore();
+  const onClick = useCallback(
+    (e: ThreeEvent<MouseEvent>) => {
+      e.stopPropagation();
+      if (status !== 'overview' || !artifactId) return;
+      const host = SPACECRAFT[artifactId]?.hostPlanet;
+      if (host) setFocused(host);
+      setFocusedArtifact(artifactId);
+    },
+    [artifactId, status, setFocused, setFocusedArtifact]
+  );
+
   return (
-    <group ref={groupRef} position={position} quaternion={quaternion}>
+    <group ref={groupRef} position={position} quaternion={quaternion} onClick={onClick}>
       <group rotation={[0, yaw, 0]}>
         <primitive object={cloned} scale={scale} />
       </group>
