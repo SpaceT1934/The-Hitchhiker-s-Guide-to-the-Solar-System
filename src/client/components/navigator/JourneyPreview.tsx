@@ -40,14 +40,14 @@ export function JourneyPreview() {
         >
           <div className="flex items-baseline justify-between">
             <div className="text-stardust/85 text-[11px] tracking-cosmic uppercase">
-              Journey · {journey.stops.length} 站
+              探索路线 · {journey.stops.length} 站
             </div>
             <button
               type="button"
               onClick={retry}
               className="text-stardust/35 hover:text-stardust/85 text-[10px] tracking-cosmic uppercase transition-colors duration-300"
             >
-              × 换一段 · Try another
+              × 换一条路线 · Retry
             </button>
           </div>
 
@@ -67,7 +67,7 @@ export function JourneyPreview() {
 
           <div className="mt-7 flex items-center justify-between">
             <div className="text-stardust/35 text-[10px] tracking-cosmic uppercase">
-              Esc 退出 · Leave
+              Esc 返回 · Back
             </div>
             <button
               type="button"
@@ -75,7 +75,7 @@ export function JourneyPreview() {
               className="px-10 py-3 bg-white/[0.03] hover:bg-white/[0.07] backdrop-blur-md border border-white/25 hover:border-white/55 text-stardust/95 hover:text-stardust text-[11px] tracking-cosmic uppercase font-thin transition-all duration-700 ease-out"
               style={{ boxShadow: '0 0 60px rgba(155,216,255,0.08)' }}
             >
-              启程 · Begin Journey ›
+              开始探索 · Start Tour ›
             </button>
           </div>
         </div>

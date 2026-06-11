@@ -104,7 +104,7 @@ export function JourneySummary() {
       });
 
       const link = document.createElement('a');
-      link.download = `solar-system-guide-journey-${Date.now()}.png`;
+      link.download = `solar-system-guide-${Date.now()}.png`;
       link.href = dataUrl;
       link.click();
     } catch (e) {
@@ -128,7 +128,7 @@ export function JourneySummary() {
             <div className="flex items-baseline justify-between">
               <div>
                 <div className="text-stardust/85 text-[10px] tracking-cosmic uppercase">
-                  太阳系漫游指南 · Journey 01
+                  太阳系漫游指南 · 探索路线
                 </div>
                 <div className="mt-1 text-stardust/55 text-[12px] tracking-wider2">
                   科学与想象之旅 · 每一次探索都是新的发现
@@ -156,7 +156,7 @@ export function JourneySummary() {
 
             {/* Stops grid */}
             <div className="mt-8 text-stardust/55 text-[10px] tracking-cosmic uppercase">
-              旅程
+              探索路线
             </div>
             <div className="mt-5 grid grid-cols-1 gap-5">
               {journey.stops.map((stop, i) => {
@@ -257,7 +257,7 @@ export function JourneySummary() {
                 太阳系漫游指南
               </span>
               <span className="text-stardust/15">·</span>
-              <span className="text-stardust/30 text-[9px] tracking-cosmic uppercase">DLC 01</span>
+              <span className="text-stardust/30 text-[9px] tracking-cosmic uppercase">Solar System Guide</span>
             </div>
           </div>
 

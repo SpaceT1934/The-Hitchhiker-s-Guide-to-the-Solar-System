@@ -54,15 +54,15 @@ export function VoyagePlot({ fadeCls }: Props) {
 
           <div className="flex items-stretch gap-4">
             <ChoiceButton
-              labelEn="Explore Freely"
-              labelZh="自主探索"
+              labelEn="Free Explore"
+              labelZh="自由探索"
               hint="拖拽 · 滚轮 · WASD · 右侧资料库"
               onClick={exploreFreely}
             />
             <ChoiceButton
-              labelEn="Navigator"
-              labelZh="领航员引导"
-              hint="AI 导览员根据你的问题策划科学探索路线"
+              labelEn="AI Guide"
+              labelZh="AI 导览"
+              hint="向 AI 提问，自动规划一条科学探索路线"
               glow
               onClick={openNavigator}
             />
@@ -72,7 +72,7 @@ export function VoyagePlot({ fadeCls }: Props) {
             className="mt-2 text-[#9bd8ff]/75 text-[12px] tracking-wider2"
             style={{ textShadow: '0 0 18px rgba(155,216,255,0.18)' }}
           >
-            建议开启领航员模式
+            推荐使用 AI 导览
           </div>
         </div>
       </div>
@@ -85,10 +85,10 @@ export function VoyagePlot({ fadeCls }: Props) {
       className={`fixed bottom-10 right-10 z-10 worlds-fade-in pointer-events-auto ${fadeCls}`}
     >
       <div className="flex items-stretch gap-2.5">
-        <CompactPill labelZh="自主探索" labelEn="Explore" onClick={exploreFreely} />
+        <CompactPill labelZh="自由探索" labelEn="Explore" onClick={exploreFreely} />
         <CompactPill
-          labelZh="领航员"
-          labelEn="Navigator"
+          labelZh="AI 导览"
+          labelEn="AI Guide"
           glow
           onClick={openNavigator}
         />

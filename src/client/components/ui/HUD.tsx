@@ -40,7 +40,7 @@ export function HUD() {
       : 'In transit'
     : focused || focusedArtifact
       ? null
-      : '太阳系漫游指南 · Solar System Guide';
+      : '太阳系漫游指南 · The Hitchhiker\'s Guide to the Solar System';
 
   // Brand line + full HUD hides during Navigator prompt / loading / preview.
   // But the top-left science card stays visible during journey (running) —
@@ -128,7 +128,7 @@ export function HUD() {
             onClick={cancelVoyage}
             className="px-5 py-2.5 border border-stardust/20 hover:border-stardust/45 text-stardust/55 hover:text-stardust/85 text-[11px] tracking-cosmic uppercase bg-stardust/[0.02] hover:bg-stardust/[0.05] backdrop-blur-md transition-all duration-500"
           >
-            中止 · Abort
+            取消 · Cancel
           </button>
         </div>
       )}
@@ -137,10 +137,10 @@ export function HUD() {
         className={`absolute bottom-3 left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none text-stardust/25 text-[10px] tracking-cosmic uppercase ${fadeCls}`}
       >
         {inVoyage
-          ? '传送中 · 保持稳定 · Engaging transit'
+          ? '移动中 · Camera in transit'
           : inFocus
-            ? '拖拽环绕 · 滚轮靠近 · WASD 自由飞行 · ⌘K 唤起领航员'
-            : 'WASD 自由飞行 · 拖拽 · 滚轮 · 规划路线 · ⌘K 唤起领航员'}
+            ? '拖拽环绕 · 滚轮缩放 · WASD 飞行 · ⌘K AI 提问'
+            : 'WASD 飞行 · 拖拽 · 滚轮 · ⌘K AI 提问'}
       </div>
 
       <MoviePanel />

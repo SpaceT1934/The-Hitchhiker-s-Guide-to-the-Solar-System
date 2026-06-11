@@ -118,7 +118,7 @@ export function Navigator() {
       });
       const data: JourneyApiResponse = await res.json();
       if (!data.ok) {
-        setError(data.error ?? '领航员遇到问题 · Navigator failed');
+        setError(data.error ?? 'AI 导览遇到问题 · AI Guide failed');
         setNavigatorPhase('prompting');
         return;
       }
@@ -161,7 +161,7 @@ export function Navigator() {
         >
           <div className="flex items-baseline justify-between">
             <div className="text-stardust/85 text-[11px] tracking-cosmic uppercase">
-              太阳系漫游指南 · Navigator
+              太阳系漫游指南 · AI 导览
             </div>
             <button
               type="button"
@@ -249,7 +249,7 @@ export function Navigator() {
 
           <div className="mt-7 flex items-center justify-between">
             <div className="text-stardust/30 text-[10px] tracking-cosmic uppercase">
-              {isLoading ? '领航员规划中… · Plotting' : 'Esc 取消 · Cancel'}
+              {isLoading ? 'AI 思考中… · Thinking' : 'Esc 取消 · Cancel'}
             </div>
 
             <button
@@ -258,7 +258,7 @@ export function Navigator() {
               disabled={!mood.trim() || isLoading}
               className="px-8 py-3 bg-white/[0.03] hover:bg-white/[0.07] disabled:hover:bg-white/[0.03] backdrop-blur-md border border-white/20 hover:border-white/45 disabled:border-white/8 text-stardust/90 hover:text-stardust disabled:text-stardust/30 text-[11px] tracking-cosmic uppercase font-thin transition-all duration-700 ease-out disabled:cursor-not-allowed"
             >
-              {isLoading ? '规划中…' : '规划旅程 · Plot Journey'}
+              {isLoading ? '规划中…' : '开始导览 · Start Tour'}
             </button>
           </div>
         </div>
