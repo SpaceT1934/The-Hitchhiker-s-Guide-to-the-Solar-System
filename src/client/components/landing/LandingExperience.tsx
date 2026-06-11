@@ -84,35 +84,13 @@ export function LandingExperience() {
             每一颗行星都有两个故事 —— 一个属于科学，一个属于想象
           </p>
 
-          {/* Feature pills */}
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
-            {[
-              { label: '10 颗天体', sub: '真实数据' },
-              { label: '9 个航天器', sub: 'NASA 模型' },
-              { label: '28 部电影', sub: 'AI 推荐' },
-              { label: '25 本书籍', sub: '科普 + 科幻' },
-            ].map((f) => (
-              <div
-                key={f.label}
-                className="px-4 py-2.5 border border-stardust/10 bg-stardust/[0.01] backdrop-blur-sm"
-              >
-                <span className="text-stardust/60 text-[12px] tracking-wider2 font-light">
-                  {f.label}
-                </span>
-                <span className="ml-2 text-stardust/25 text-[9px] tracking-cosmic uppercase">
-                  {f.sub}
-                </span>
-              </div>
-            ))}
-          </div>
-
           {/* CTA */}
           <div className="mt-16">
             <button
               type="button"
               onClick={onEnter}
-              className="group relative px-16 py-4.5 bg-transparent border border-stardust/30 hover:border-stardust/60 text-stardust/85 hover:text-stardust text-[12px] tracking-cosmic uppercase font-thin transition-all duration-1000 ease-out"
-              style={{ boxShadow: '0 0 80px rgba(155,216,255,0.05)' }}
+              className="group relative px-20 py-5 bg-transparent border border-stardust/30 hover:border-stardust/60 text-stardust/90 hover:text-stardust text-[15px] tracking-cosmic uppercase font-thin transition-all duration-1000 ease-out"
+              style={{ boxShadow: '0 0 100px rgba(155,216,255,0.08)' }}
             >
               <span className="relative z-10">进入太阳系 · Enter</span>
               <span className="absolute inset-0 bg-stardust/[0.02] group-hover:bg-stardust/[0.04] transition-colors duration-1000" />
