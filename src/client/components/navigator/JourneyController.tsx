@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { useSceneStore } from '@/client/store/sceneStore';
-import { SPACECRAFT } from '@/client/data/journeyInventory';
 
 import { Subtitle } from './Subtitle';
 import { StopCard } from './StopCard';
@@ -45,8 +44,9 @@ export function JourneyController() {
       setFocusedArtifact(null);
       setFocused(stop.target.id);
     } else {
-      const host = SPACECRAFT[stop.target.id].hostPlanet;
-      setFocused(host);
+      // Don't set focused here — the camera resolves the host planet
+      // from SPACECRAFT data directly. Setting focused=host causes
+      // PlanetCard to flash before ArtifactCard takes over.
       setFocusedArtifact(stop.target.id);
     }
 
