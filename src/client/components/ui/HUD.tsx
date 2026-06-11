@@ -7,6 +7,7 @@ import { VoyagePlot } from './VoyagePlot';
 import { MoviePanel } from './MoviePanel';
 import { LibraryPanel } from './LibraryPanel';
 import { KnowledgeTicker } from './KnowledgeTicker';
+import { BookPanel } from './BookPanel';
 
 export function HUD() {
   const {
@@ -143,6 +144,7 @@ export function HUD() {
       </div>
 
       <MoviePanel />
+      <BookPanel />
       <LibraryPanel />
       <KnowledgeTicker />
     </>

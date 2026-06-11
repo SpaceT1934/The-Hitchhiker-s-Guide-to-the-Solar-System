@@ -65,6 +65,8 @@ export function LibraryPanel() {
     setFocused,
     setFocusedArtifact,
     setSelectedPoster,
+    setSelectedBook,
+    selectedBook,
     focused,
     focusedArtifact
   } = useSceneStore();
@@ -102,9 +104,10 @@ export function LibraryPanel() {
     setFocusedArtifact(id);
   };
 
-  const onPickBook = (book: BookInfo) => {
+  const onPickBook = (book: BookInfo, idx: number) => {
     setFocusedArtifact(null);
     setFocused(book.planet);
+    setSelectedBook(idx);
   };
 
   const planetsWithContent = PLANET_ORDER.filter(
@@ -235,12 +238,12 @@ export function LibraryPanel() {
                     />
                   ))}
                   {/* Books */}
-                  {books.map((book) => (
+                  {books.map((book, bi) => (
                     <BookCard
                       key={book.titleZh}
                       book={book}
-                      active={focused === book.planet && !focusedArtifact}
-                      onClick={() => onPickBook(book)}
+                      active={focused === book.planet && !focusedArtifact && selectedBook === bi}
+                      onClick={() => onPickBook(book, bi)}
                     />
                   ))}
                 </div>

@@ -80,6 +80,7 @@ type SceneStore = {
   voyageFrom: PlanetId | null;
   voyageTo: PlanetId | null;
   selectedPoster: string | null;
+  selectedBook: number | null;
   introDone: boolean;
   navigatorPhase: NavigatorPhase;
   journey: Journey | null;
@@ -95,6 +96,7 @@ type SceneStore = {
   setVoyageFrom: (id: PlanetId | null) => void;
   setVoyageTo: (id: PlanetId | null) => void;
   setSelectedPoster: (path: string | null) => void;
+  setSelectedBook: (idx: number | null) => void;
   setIntroDone: (done: boolean) => void;
   setNavigatorPhase: (phase: NavigatorPhase) => void;
   setJourney: (journey: Journey | null) => void;
@@ -119,6 +121,7 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
   const [voyageFrom, setVoyageFrom] = useState<PlanetId | null>('earth');
   const [voyageTo, setVoyageTo] = useState<PlanetId | null>('mars');
   const [selectedPoster, setSelectedPoster] = useState<string | null>(null);
+  const [selectedBook, setSelectedBook] = useState<number | null>(null);
   const [introDone, setIntroDone] = useState<boolean>(false);
   const [navigatorPhase, setNavigatorPhase] = useState<NavigatorPhase>('closed');
   const [journey, setJourney] = useState<Journey | null>(null);
@@ -155,6 +158,7 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
       voyageFrom,
       voyageTo,
       selectedPoster,
+      selectedBook,
       introDone,
       navigatorPhase,
       journey,
@@ -170,6 +174,7 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
       setVoyageFrom,
       setVoyageTo,
       setSelectedPoster,
+      setSelectedBook,
       setIntroDone,
       setNavigatorPhase,
       setJourney,
@@ -188,6 +193,7 @@ export function SceneStoreProvider({ children }: { children: ReactNode }) {
       voyageFrom,
       voyageTo,
       selectedPoster,
+      selectedBook,
       introDone,
       navigatorPhase,
       journey,
